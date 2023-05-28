@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	"encoding/json"
+	"strings"
 )
 
 // HostURL - Default Tourists URL
@@ -61,4 +63,72 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 	}
 
 	return body, err
+}
+
+// GetTourists - Returns list of tourists (no auth required)
+func (c *Client) GetTourists() ([]Tourists, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/api/Tourist", c.HostURL), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	tourists := []Tourist{}
+	err = json.Unmarshal(body, &tourists)
+	if err != nil {
+		return nil, err
+	}
+
+	return tourists, nil
+}
+
+// GetTourist - Returns specific tourist (no auth required)
+func (c *Client) GetTourist(touristID string) ([]Tourist, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/api/Tourist/%s", c.HostURL, touristID), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	tourists := []Tourist{}
+	err = json.Unmarshal(body, &tourists)
+	if err != nil {
+		return nil, err
+	}
+
+	return tourists, nil
+}
+
+// CreateTourist - Create new tourist
+func (c *Client) CreateTourist(tourist Tourist, authToken *string) (*Tourist, error) {
+	rb, err := json.Marshal(tourist)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/api/Tourist", c.HostURL), strings.NewReader(string(rb)))
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	newTourist := Tourist{}
+	err = json.Unmarshal(body, &newTourist)
+	if err != nil {
+		return nil, err
+	}
+
+	return &newTourist, nil
 }
