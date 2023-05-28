@@ -66,7 +66,7 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 }
 
 // GetTourists - Returns list of tourists (no auth required)
-func (c *Client) GetTourists() ([]Tourists, error) {
+func (c *Client) GetTourists() ([]Tourist, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/api/Tourist", c.HostURL), nil)
 	if err != nil {
 		return nil, err
