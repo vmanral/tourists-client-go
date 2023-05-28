@@ -45,14 +45,6 @@ func NewClient(host *string) (*Client, error) {
 }
 
 func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error) {
-	token := c.Token
-
-	if authToken != nil {
-		token = *authToken
-	}
-
-	req.Header.Set("Authorization", token)
-
 	res, err := c.HTTPClient.Do(req)
 	if err != nil {
 		return nil, err
