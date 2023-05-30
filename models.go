@@ -9,7 +9,6 @@ type Order struct {
 // OrderItem -
 type OrderItem struct {
 	Tourist   Tourist `json:"tourist"`
-	Quantity  int    `json:"quantity"`
 }
 
 // Tourist -
