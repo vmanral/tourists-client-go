@@ -66,21 +66,23 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 }
 
 // GetTourists - Returns list of tourists (no auth required)
-func (c *Client) GetTourists() ([]Tourist, error) {
+func (c *Client) GetTourists() (Tourist, error) {
+	var tourists Tourist
+
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/api/Tourist", c.HostURL), nil)
 	if err != nil {
-		return nil, err
+		return tourists, err
 	}
 
 	body, err := c.doRequest(req, nil)
 	if err != nil {
-		return nil, err
+		return tourists, err
 	}
 
-	tourists := []Tourist{}
+	//tourists := []Tourist{}
 	err = json.Unmarshal(body, &tourists)
 	if err != nil {
-		return nil, err
+		return tourists, err
 	}
 
 	return tourists, nil

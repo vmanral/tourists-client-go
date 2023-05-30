@@ -14,6 +14,14 @@ type OrderItem struct {
 
 // Tourist -
 type Tourist struct {
+	Page              int            `json:"page"`
+	Per_Page          int            `json:"per_page"`
+	TotalRecord       int            `json:"totalrecord"`
+	Total_Pages       int            `json:"total_pages"`
+	Data              []TouristData  `json:"data"`
+}
+
+type TouristData struct {
 	ID                int            `json:"id"`
 	Tourist_Name      string         `json:"tourist_name"`
 	Tourist_Email     string         `json:"tourist_email"`
