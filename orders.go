@@ -76,8 +76,8 @@ func (c *Client) CreateOrder(orderItems []OrderItem, authToken *string) (*Order,
 	return &order, nil
 }
 
-// CreateTourist - Create new tourist
-func (c *Client) CreateTourist(orderItems TouristInput) (*TouristData, error) {
+// CreateNewTourist - Create new tourist
+func (c *Client) CreateNewTourist(orderItems TouristInput) (*TouristData, error) {
 	fmt.Println(orderItems)
 	rb, err := json.Marshal(orderItems)
 	fmt.Println(rb)
