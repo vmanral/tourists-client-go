@@ -8,7 +8,10 @@ type Order struct {
 
 // OrderItem -
 type OrderItem struct {
-	Tourist   Tourist `json:"tourist"`
+	Tourist   TouristData `json:"tourist"`
+	//Tourist_Name      string         `json:"tourist_name"`
+	//Tourist_Email     string         `json:"tourist_email"`
+	//Tourist_Location  string         `json:"tourist_location"`
 }
 
 // Tourist -
@@ -26,4 +29,10 @@ type TouristData struct {
 	Tourist_Email     string         `json:"tourist_email"`
 	Tourist_Location  string         `json:"tourist_location"`
 	Createdat         string         `json:"Createdat"`
+}
+
+type TouristInput struct {
+	Tourist_Name      string         `json:"tourist_name"`
+	Tourist_Email     string         `json:"tourist_email"`
+	Tourist_Location  string         `json:"tourist_location"`
 }

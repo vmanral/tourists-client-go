@@ -1,4 +1,4 @@
-package hashicups
+package tourists
 
 import (
 	"encoding/json"
@@ -68,6 +68,40 @@ func (c *Client) CreateOrder(orderItems []OrderItem, authToken *string) (*Order,
 	}
 
 	order := Order{}
+	err = json.Unmarshal(body, &order)
+	if err != nil {
+		return nil, err
+	}
+
+	return &order, nil
+}
+
+// CreateTourist - Create new tourist
+func (c *Client) CreateTourist(orderItems TouristInput) (*TouristData, error) {
+	fmt.Println(orderItems)
+	rb, err := json.Marshal(orderItems)
+	fmt.Println(rb)
+	if err != nil {
+		return nil, err
+	}
+
+	fmt.Println(string(rb))
+	fmt.Println(strings.NewReader(string(rb)))
+
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/api/Tourist", c.HostURL), strings.NewReader(string(rb)))
+	req.Header.Add("Content-Type", "application/json")
+	fmt.Println(req)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, nil)
+	fmt.Println(body)
+	if err != nil {
+		return nil, err
+	}
+
+	order := TouristData{}
 	err = json.Unmarshal(body, &order)
 	if err != nil {
 		return nil, err
