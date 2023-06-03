@@ -50,8 +50,8 @@ func (c *Client) GetOrder(orderID string, authToken *string) (*Order, error) {
 	return &order, nil
 }
 
-// GetTourist - Returns details of a specifc tourist
-func (c *Client) GetTourist(touristID string) (*TouristData, error) {
+// GetSpecificTourist - Returns details of a specifc tourist
+func (c *Client) GetSpecificTourist(touristID string) (*TouristData, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/api/Tourist/%s", c.HostURL, touristID), nil)
 	if err != nil {
 		return nil, err
