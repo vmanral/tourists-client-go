@@ -24,7 +24,7 @@ type Tourist struct {
 }
 
 type TouristData struct {
-	ID                int            `json:"id"`
+	ID                string         `json:"id"`
 	Tourist_Name      string         `json:"tourist_name"`
 	Tourist_Email     string         `json:"tourist_email"`
 	Tourist_Location  string         `json:"tourist_location"`
